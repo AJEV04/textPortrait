@@ -1,4 +1,7 @@
-<head>
+<!DOCTYPE html>
+<html>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body{
       margin: 0;
@@ -27,6 +30,9 @@
   <title>Text Portrait</title>
 </head>
 <body>
+  <audio autoplay muted src="irisMusic.mp3">
+  </audio>
+  
   <p>And I'd give up forever to touch you
 'Cause I know that you feel me somehow
 You're the closest to Heaven that I'll ever be
@@ -739,5 +745,17 @@ When everything's made to be broken
 I just want you to know who I am
 I just want you to know who I am
 I just want you to know who I am
-I just want you to know who I am</p>
+I just want you to know who I am
+</p>
 </body>
+
+<audio id="bgMusic" loop>
+  <source src="irisMusic.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  document.addEventListener("click", function() {
+    document.getElementById("bgMusic").play();
+  }, { once: true });
+</script>
+</html>
