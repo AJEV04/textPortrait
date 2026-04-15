@@ -769,11 +769,16 @@ I just want you to know who I am
       .then(res => res.json())
       .then(data => {
         document.getElementById("visit-count").innerText = data.count;
+      })
+      .catch(err => {
+        console.log("Error:", err);
+        document.getElementById("visit-count").innerText = "Error";
       });
 
     sessionStorage.setItem("counted", "true");
   } else {
-    fetch(`https://api.counterapi.dev/v1/${namespace}/${key}`)
+    // Already counted in this session → just fetch current value
+    fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
       .then(res => res.json())
       .then(data => {
         document.getElementById("visit-count").innerText = data.count;
