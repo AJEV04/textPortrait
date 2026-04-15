@@ -25,7 +25,7 @@
     fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
       .then(res => res.json())
       .then(data => {
-        document.getElementById("visit-count").innerText = data.value;
+        document.getElementById("count").innerText = data.value;
       });
   </script>
 
