@@ -756,23 +756,34 @@ I just want you to know who I am
   <source src="irisMusic.mp3" type="audio/mpeg">
 </audio>
 
-<script>
+<script type="module">
   document.addEventListener("click", function() {
     document.getElementById("bgMusic").play();
   }, { once: true });
 
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getDatabase, ref, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-  const namespace = "AJEV04";
-  const key = "hotdog";
+const firebaseConfig = {
+  apiKey: "AIzaSyBSVRkjTvMnIoeSy0_o2qkgUdmzyh5Dhr8",
+  authDomain: "hotdog-counter-a2809.firebaseapp.com",
+  projectId: "hotdog-counter-a2809",
+  storageBucket: "hotdog-counter-a2809.firebasestorage.app",
+  messagingSenderId: "1066195816150",
+  appId: "1:1066195816150:web:cf3d24af40b21ab23d8377",
+  measurementId: "G-1M2EZJ16RX"
+};
 
-  fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("visit-count").innerText = data.count;
-    })
-    .catch(err => console.log(err));
-});
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  const counterRef = ref(db, "visits");
+
+  runTransaction(counterRef, (current) => {
+    return (current || 0) + 1;
+  }).then((result) => {
+    document.getElementById("visit-count").innerText = result.snapshot.val();
+  });
 </script>
   
 </body>
