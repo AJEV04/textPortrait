@@ -756,37 +756,48 @@ I just want you to know who I am
   <source src="irisMusic.mp3" type="audio/mpeg">
 </audio>
 
-<script>
+<script type="module">
   document.addEventListener("click", function() {
     document.getElementById("bgMusic").play();
   }, { once: true });
 
-  const namespace = "ajev04";
-  const key = "visits";
 
-  const readUrl = `https://api.allorigins.win/raw?url=` +
-    encodeURIComponent(`https://api.counterapi.dev/v1/${namespace}/${key}`);
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, runTransaction, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-  const writeUrl = `https://api.counterapi.dev/v1/${namespace}/${key}/up`;
+const firebaseConfig = {
+  apiKey: "AIzaSyCxaZSLX9miBchqnLlW4kAx1wDtBR8zIgM",
+  authDomain: "hotdog-counter-20ef9.firebaseapp.com",
+  databaseURL: "https://hotdog-counter-20ef9-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "hotdog-counter-20ef9",
+  storageBucket: "hotdog-counter-20ef9.firebasestorage.app",
+  messagingSenderId: "101553294232",
+  appId: "1:101553294232:web:0c5bbc63430d7709df79ed"
+};
 
-  // ALWAYS show current value first
-  fetch(readUrl)
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("visit-count").innerText = data.count;
-    });
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
-  // ONLY increment once per tab session
-  if (!sessionStorage.getItem("counted")) {
-    fetch(writeUrl)
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("visit-count").innerText = data.count;
-      });
+const counterRef = ref(db, "visits");
 
-    sessionStorage.setItem("counted", "true");
-  }
+// prevent double counting per tab
+if (!sessionStorage.getItem("counted")) {
+  runTransaction(counterRef, (current) => {
+    return (current || 0) + 1;
+  }).then((result) => {
+    document.getElementById("visit-count").innerText =
+      result.snapshot.val();
+  });
+
+  sessionStorage.setItem("counted", "true");
+} else {
+  get(counterRef).then((snapshot) => {
+    document.getElementById("visit-count").innerText =
+      snapshot.val();
+  });
+}
 </script>
+
   
 </body>
 </html>
