@@ -764,15 +764,12 @@ I just want you to know who I am
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getDatabase, ref, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBSVRkjTvMnIoeSy0_o2qkgUdmzyh5Dhr8",
-  authDomain: "hotdog-counter-a2809.firebaseapp.com",
-  projectId: "hotdog-counter-a2809",
-  storageBucket: "hotdog-counter-a2809.firebasestorage.app",
-  messagingSenderId: "1066195816150",
-  appId: "1:1066195816150:web:cf3d24af40b21ab23d8377",
-  measurementId: "G-1M2EZJ16RX"
-};
+  const firebaseConfig = {
+    apiKey: "YOUR_KEY",
+    authDomain: "YOUR_DOMAIN",
+    databaseURL: "YOUR_DB_URL",
+    projectId: "YOUR_ID"
+  };
 
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
