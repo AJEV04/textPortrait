@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Visitor Stats</title>
+</head>
+
+<body style="background:black; color:white; text-align:center; margin-top:100px;">
+
+  <h1>Visit Counter</h1>
+  <h2 id="count">Loading...</h2>
+
+  <p style="margin-top: 3rem;">This is how many time you look at it, hahaha</p>
+  <p>As of April 15, 2026</p>
+
+  <script>
+    fetch('https://api.countapi.xyz/get/my-text-portrait-site/visits')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('count').innerText = data.value;
+      });
+  </script>
+
+</body>
+
+</html>
