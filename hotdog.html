@@ -34,9 +34,9 @@
 
   <a href="counter.html" style="color:black;">View Stats</a>
 
-  <p style="color:pink;">
-  👀 Visits: <span id="visits">Loading...</span>
-  </p>
+  <div>
+  Visits: <span id="visit-count">0</span>
+</div>
   
   <p>And I'd give up forever to touch you
 'Cause I know that you feel me somehow
@@ -763,14 +763,16 @@ I just want you to know who I am
     document.getElementById("bgMusic").play();
   }, { once: true });
 
-  fetch('https://api.countapi.xyz/hit/mySite/visits')
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById('visits').innerText = data.value;
-    })
-    .catch(() => {
-      document.getElementById('visits').innerText = "Error";
-    });
+<script>
+const namespace = "AJEV04";
+const key = "hotdog";
+
+fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("visit-count").innerText = data.value;
+  });
+</script>
 </script>
 
 
