@@ -7,16 +7,18 @@
 <body style="background:black;color:white;">
   Visits: <span id="visit-count">0</span>
 
-  <script>
-    const namespace = "AJEV04";
-    const key = "hotdog";
 
-    fetch(`https://api.countapi.xyz/get/${namespace}/${key}`)
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("visit-count").innerText = data.value;
-      })
-      .catch(err => console.log("Error:", err));
-  </script>
+<script>
+const namespace = "AJEV04";
+const key = "hotdog";
+
+fetch(`https://api.counterapi.dev/v1/${namespace}/${key}`)
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("visit-count").innerText = data.count;
+  })
+  .catch(err => console.log(err));
+
+</script>
 </body>
 </html>
