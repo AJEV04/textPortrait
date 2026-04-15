@@ -29,9 +29,6 @@
   <title>Text Portrait</title>
 </head>
 <body>
-  <audio autoplay muted src="irisMusic.mp3">
-  </audio>
-
   <a href="counter.html" style="color:black;">View Stats</a>
 
   <div>
@@ -754,11 +751,11 @@ I just want you to know who I am
 </p>
 </body>
 
-<script>
 <audio id="bgMusic" loop>
   <source src="irisMusic.mp3" type="audio/mpeg">
 </audio>
-  
+
+<script>
   document.addEventListener("click", function() {
     document.getElementById("bgMusic").play();
   }, { once: true });
