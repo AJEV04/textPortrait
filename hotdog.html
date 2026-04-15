@@ -759,7 +759,7 @@ I just want you to know who I am
     document.getElementById("bgMusic").play();
   }, { once: true });
 
-  fetch('https://api.countapi.xyz/hit/my-text-portrait-site/visits')
+  fetch('https://api.countapi.xyz/hit/mySite/visits')
     .then(res => res.json())
     .then(data => {
       document.getElementById('visits').innerText = data.value;
