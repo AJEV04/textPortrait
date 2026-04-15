@@ -764,12 +764,21 @@ I just want you to know who I am
   const namespace = "ajev04";
   const key = "visits";
 
-  fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("visit-count").innerText = data.count;
-    })
-    .catch(err => console.log("Error:", err));
+  if (!sessionStorage.getItem("counted")) {
+    fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("visit-count").innerText = data.count;
+      });
+
+    sessionStorage.setItem("counted", "true");
+  } else {
+    fetch(`https://api.counterapi.dev/v1/${namespace}/${key}`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("visit-count").innerText = data.count;
+      });
+  }
 </script>
   
 </body>
