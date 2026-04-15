@@ -762,16 +762,17 @@ I just want you to know who I am
   }, { once: true });
 
 
-const namespace = "AJEV04";
-const key = "hotdog";
+document.addEventListener("DOMContentLoaded", () => {
+  const namespace = "AJEV04";
+  const key = "hotdog";
 
-// increment first
-fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById("visit-count").innerText = data.count;
-  })
-  .catch(err => console.log(err));
+  fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("visit-count").innerText = data.count;
+    })
+    .catch(err => console.log(err));
+});
 </script>
   
 </body>
