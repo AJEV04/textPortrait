@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Visitor Stats</title>
+  <title>Counter Test</title>
 </head>
 
-<body style="background:black; color:white; text-align:center; margin-top:100px;">
-
-  <h1>Visit Counter</h1>
-  <h2 id="count">Loading...</h2>
-
-  <p style="margin-top: 3rem;">
-    This is how many times people looked at it 😄
-  </p>
+<body style="background:black;color:white;">
+  Visits: <span id="visit-count">0</span>
 
   <script>
     const namespace = "AJEV04";
@@ -20,9 +14,9 @@
     fetch(`https://api.countapi.xyz/get/${namespace}/${key}`)
       .then(res => res.json())
       .then(data => {
-        document.getElementById("count").innerText = data.value;
-      });
+        document.getElementById("visit-count").innerText = data.value;
+      })
+      .catch(err => console.log("Error:", err));
   </script>
-
 </body>
 </html>
