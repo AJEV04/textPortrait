@@ -4,11 +4,50 @@
   <title>Counter Test</title>
 </head>
 
-<body style="background:black; color:white; text-align:center; margin-top:100px;">
-  Visits: <span id="visit-count">Loading...</span>
-<p style="margin-top: 3rem;">This is how many time you look at it, hahaha</p>
-<p>As of April 15, 2026</p>
+<body style="
+  background: radial-gradient(circle at center, #111 0%, #000 70%);
+  color: white;
+  text-align: center;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+">
 
+  <div style="
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 40px 60px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.03);
+    box-shadow: 0 0 40px rgba(255,255,255,0.05);
+    display: inline-block;
+    backdrop-filter: blur(6px);
+  ">
+
+    <div style="font-size: 14px; opacity: 0.6; letter-spacing: 2px;">
+      VISIT COUNTER
+    </div>
+
+    <div style="
+      font-size: 72px;
+      font-weight: bold;
+      margin: 20px 0;
+      text-shadow: 0 0 20px rgba(255,255,255,0.2);
+    ">
+      <span id="visit-count">Loading...</span>
+    </div>
+
+    <p style="margin-top: 10px; font-size: 14px; opacity: 0.7;">
+      This is how many times you looked at it, hahaha
+    </p>
+
+    <p style="margin-top: 20px; font-size: 12px; opacity: 0.4;">
+      As of April 15, 2026
+    </p>
+
+  </div>
   
 <script>
   const namespace = "ajev04";
