@@ -31,6 +31,8 @@
 <body>
   <audio autoplay muted src="irisMusic.mp3">
   </audio>
+
+  <a href="counter.html" style="color:black;">View Stats</a>
   
   <p>And I'd give up forever to touch you
 'Cause I know that you feel me somehow
@@ -756,6 +758,15 @@ I just want you to know who I am
   document.addEventListener("click", function() {
     document.getElementById("bgMusic").play();
   }, { once: true });
+
+  fetch('https://api.countapi.xyz/hit/my-text-portrait-site/visits')
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('visits').innerText = data.value;
+    })
+    .catch(() => {
+      document.getElementById('visits').innerText = "Error";
+    });
 </script>
 
 
