@@ -11,21 +11,23 @@
   const namespace = "ajev04";
   const key = "visits";
 
-  fetch(`https://api.counterapi.dev/v1/${namespace}/${key}`)
-    .then(res => res.json())
-    .then(data => {
-      console.log("API response:", data); // debug
-
-      if (data && typeof data.count !== "undefined") {
+  if (!sessionStorage.getItem("counted")) {
+    // First visit in this tab → increment
+    fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
+      .then(res => res.json())
+      .then(data => {
         document.getElementById("visit-count").innerText = data.count;
-      } else {
-        document.getElementById("visit-count").innerText = "Error";
-      }
-    })
-    .catch(err => {
-      console.log("Fetch error:", err);
-      document.getElementById("visit-count").innerText = "Failed";
-    });
+      });
+
+    sessionStorage.setItem("counted", "true");
+  } else {
+    // Already counted → just show something stable
+    fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("visit-count").innerText = data.count;
+      });
+  }
 </script>
 </body>
 </html>
