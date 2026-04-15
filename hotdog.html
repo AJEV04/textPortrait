@@ -761,28 +761,17 @@ I just want you to know who I am
     document.getElementById("bgMusic").play();
   }, { once: true });
 
+
 const namespace = "AJEV04";
 const key = "hotdog";
 
-fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+// increment first
+fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
   .then(res => res.json())
   .then(data => {
-    document.getElementById("visit-count").innerText = data.value;
-  });const namespace = "AJEV04";
-    const key = "hotdog";
-
-    // IMPORTANT: wait for DOM first
-    document.addEventListener("DOMContentLoaded", () => {
-
-      // increment
-      fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
-        .then(res => res.json())
-        .then(data => {
-          document.getElementById("visit-count").innerText = data.value;
-        })
-        .catch(err => console.log("Hit error:", err));
-
-    });
+    document.getElementById("visit-count").innerText = data.count;
+  })
+  .catch(err => console.log(err));
 </script>
   
 </body>
