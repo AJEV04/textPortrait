@@ -768,7 +768,21 @@ fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
   .then(res => res.json())
   .then(data => {
     document.getElementById("visit-count").innerText = data.value;
-  });
+  });const namespace = "AJEV04";
+    const key = "hotdog";
+
+    // IMPORTANT: wait for DOM first
+    document.addEventListener("DOMContentLoaded", () => {
+
+      // increment
+      fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("visit-count").innerText = data.value;
+        })
+        .catch(err => console.log("Hit error:", err));
+
+    });
 </script>
   
 </body>
