@@ -22,7 +22,7 @@
     const namespace = "AJEV04";
     const key = "hotdog";
 
-    fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+    fetch(`https://api.countapi.xyz/get/${namespace}/${key}`)
       .then(res => res.json())
       .then(data => {
         document.getElementById("count").innerText = data.value;
