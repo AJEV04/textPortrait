@@ -11,23 +11,18 @@
   const namespace = "ajev04";
   const key = "visits";
 
-  if (!sessionStorage.getItem("counted")) {
-    // First visit in this tab → increment
-    fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("visit-count").innerText = data.count;
-      });
-
-    sessionStorage.setItem("counted", "true");
-  } else {
-    // Already counted → just show something stable
-    fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("visit-count").innerText = data.count;
-      });
-  }
+  fetch(
+    `https://api.allorigins.win/raw?url=` +
+    encodeURIComponent(`https://api.counterapi.dev/v1/${namespace}/${key}`)
+  )
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("visit-count").innerText = data.count;
+    })
+    .catch(err => {
+      console.log("Error:", err);
+      document.getElementById("visit-count").innerText = "Error";
+    });
 </script>
 </body>
 </html>
