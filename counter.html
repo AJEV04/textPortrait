@@ -5,20 +5,19 @@
 </head>
 
 <body style="background:black;color:white;">
-  Visits: <span id="visit-count">0</span>
+  Visits: <span id="visit-count">Loading...</span>
 
+  <script>
+    const namespace = "AJEV04";
+    const key = "hotdog";
 
-<script>
-const namespace = "AJEV04";
-const key = "hotdog";
-
-fetch(`https://api.counterapi.dev/v1/${namespace}/${key}`)
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById("visit-count").innerText = data.count;
-  })
-  .catch(err => console.log(err));
-
-</script>
+    fetch(`https://api.counterapi.dev/v1/${namespace}/${key}`)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data); // DEBUG (important)
+        document.getElementById("visit-count").innerText = data.count;
+      })
+      .catch(err => console.log("Error:", err));
+  </script>
 </body>
 </html>
