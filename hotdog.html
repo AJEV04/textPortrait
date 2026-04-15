@@ -757,11 +757,6 @@ I just want you to know who I am
 </audio>
 
 <script type="module">
-  document.addEventListener("click", function() {
-    document.getElementById("bgMusic").play();
-  }, { once: true });
-
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getDatabase, ref, runTransaction, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
@@ -780,7 +775,14 @@ const db = getDatabase(app);
 
 const counterRef = ref(db, "visits");
 
-// prevent double counting per tab
+// MUSIC (kept separate but still inside module scope)
+document.addEventListener("click", () => {
+  const music = document.getElementById("bgMusic");
+  if (music) music.play();
+}, { once: true });
+
+
+// VISIT COUNTER LOGIC
 if (!sessionStorage.getItem("counted")) {
   runTransaction(counterRef, (current) => {
     return (current || 0) + 1;
@@ -793,7 +795,7 @@ if (!sessionStorage.getItem("counted")) {
 } else {
   get(counterRef).then((snapshot) => {
     document.getElementById("visit-count").innerText =
-      snapshot.val();
+      snapshot.val() || 0;
   });
 }
 </script>
