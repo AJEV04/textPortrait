@@ -764,25 +764,27 @@ I just want you to know who I am
   const namespace = "ajev04";
   const key = "visits";
 
+  const readUrl = `https://api.allorigins.win/raw?url=` +
+    encodeURIComponent(`https://api.counterapi.dev/v1/${namespace}/${key}`);
+
+  const writeUrl = `https://api.counterapi.dev/v1/${namespace}/${key}/up`;
+
+  // ALWAYS show current value first
+  fetch(readUrl)
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("visit-count").innerText = data.count;
+    });
+
+  // ONLY increment once per tab session
   if (!sessionStorage.getItem("counted")) {
-    fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
+    fetch(writeUrl)
       .then(res => res.json())
       .then(data => {
         document.getElementById("visit-count").innerText = data.count;
-      })
-      .catch(err => console.log(err));
+      });
 
     sessionStorage.setItem("counted", "true");
-  } else {
-    // just display current value (safe read via proxy)
-    fetch(`https://api.allorigins.win/raw?url=` +
-      encodeURIComponent(`https://api.counterapi.dev/v1/${namespace}/${key}`)
-    )
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("visit-count").innerText = data.count;
-      })
-      .catch(err => console.log(err));
   }
 </script>
   
