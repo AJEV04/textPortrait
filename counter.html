@@ -14,9 +14,18 @@
   fetch(`https://api.counterapi.dev/v1/${namespace}/${key}`)
     .then(res => res.json())
     .then(data => {
-      document.getElementById("visit-count").innerText = data.count;
+      console.log("API response:", data); // debug
+
+      if (data && typeof data.count !== "undefined") {
+        document.getElementById("visit-count").innerText = data.count;
+      } else {
+        document.getElementById("visit-count").innerText = "Error";
+      }
     })
-    .catch(err => console.log("Error:", err));
+    .catch(err => {
+      console.log("Fetch error:", err);
+      document.getElementById("visit-count").innerText = "Failed";
+    });
 </script>
 </body>
 </html>
